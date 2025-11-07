@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qln4pk71gpli"]
 
-[ext_resource type="Script" uid="uid://b52ptuas6upr" path="res://scripts/start_button.gd" id="1_fgkus"]
+[ext_resource type="Script" uid="uid://b52ptuas6upr" path="res://scripts/title/start_button.gd" id="1_fgkus"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fgkus"]
 font_size = 48

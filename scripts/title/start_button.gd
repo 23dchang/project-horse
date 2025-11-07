@@ -5,5 +5,6 @@ extends Button
 # the name of variables/scripts as I assume "start_button.gd" may clash with future buttons
 # of a similar name. As such, feel free to change/rewrite the code here. THX!
 
+
 func _on_pressed() -> void:
 	get_tree().root.get_node("World").load_scene("res://scenes/boss_fight.tscn")

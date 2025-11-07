@@ -1,31 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxup8n4v6j744"]
+[gd_scene load_steps=3 format=3 uid="uid://dxup8n4v6j744"]
 
-[ext_resource type="PackedScene" uid="uid://bjmuycx5idny3" path="res://scenes/player.tscn" id="1_dl1d0"]
+[ext_resource type="Script" uid="uid://6d1035bdpl8y" path="res://scripts/boss_fight.gd" id="1_1hapx"]
+[ext_resource type="Script" uid="uid://cqwc4648ewx74" path="res://scripts/boss_fight_manager.gd" id="3_7ydql"]
 
 [node name="BossFight" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_dl1d0")]
-position = Vector2(-275, -227)
-
-[node name="Player2" parent="." instance=ExtResource("1_dl1d0")]
-position = Vector2(-471, -122)
-
-[node name="Player3" parent="." instance=ExtResource("1_dl1d0")]
-position = Vector2(-480, 98)
-
-[node name="Player4" parent="." instance=ExtResource("1_dl1d0")]
-position = Vector2(-267, 225)
+script = ExtResource("1_1hapx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="MenuButton" type="MenuButton" parent="."]
-offset_left = 85.0
-offset_top = -28.0
-offset_right = 562.0
-offset_bottom = 168.0
-text = "I am a MenuButton!"
-item_count = 1
-popup/item_0/text = "Item 0"
-popup/item_0/checkable = 1
-popup/item_0/checked = true
-popup/item_0/id = 0
+[node name="BossFightManager" type="Node" parent="."]
+script = ExtResource("3_7ydql")
