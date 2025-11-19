@@ -12,6 +12,8 @@ height = 188.0
 [node name="Boss" type="CharacterBody2D"]
 visible = false
 script = ExtResource("1_mdhvr")
+speed = 4.0
+skill_slots = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

@@ -12,16 +12,17 @@ offset_left = -346.0
 offset_top = -140.0
 offset_right = 347.0
 offset_bottom = -73.0
-text = "HELLO THIS IS A TITLE SCREEN"
+text = "Project Horse"
 label_settings = SubResource("LabelSettings_fgkus")
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="StartButton" type="Button" parent="."]
 offset_left = -68.0
-offset_top = -27.0
+offset_top = 10.0
 offset_right = 65.0
-offset_bottom = 45.0
+offset_bottom = 82.0
 text = "Start Game"
 script = ExtResource("1_fgkus")
 

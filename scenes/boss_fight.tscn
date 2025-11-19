@@ -1,7 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxup8n4v6j744"]
 
-[ext_resource type="Script" uid="uid://6d1035bdpl8y" path="res://scripts/boss_fight.gd" id="1_1hapx"]
-[ext_resource type="Script" uid="uid://cqwc4648ewx74" path="res://scripts/boss_fight_manager.gd" id="3_7ydql"]
+[ext_resource type="Script" uid="uid://dyuqky6004u2x" path="res://scripts/battle_manager.gd" id="2_1hapx"]
 [ext_resource type="PackedScene" uid="uid://bvedsk338f7yw" path="res://scenes/UI/SkillsColumn.tscn" id="3_85w88"]
 
 [node name="BossFight" type="Node2D"]
@@ -18,7 +17,27 @@ text = "BOSS FIGHT SCENE"
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="BossFightManager" type="Node" parent="."]
-script = ExtResource("3_7ydql")
+script = ExtResource("2_1hapx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="BossFightManager"]
+
+[node name="Player1Health" type="Label" parent="BossFightManager/CanvasLayer"]
+offset_left = 59.0
+offset_top = 54.0
+offset_right = 99.0
+offset_bottom = 77.0
+
+[node name="Player2Health" type="Label" parent="BossFightManager/CanvasLayer"]
+offset_left = 141.0
+offset_top = 413.0
+offset_right = 181.0
+offset_bottom = 436.0
+
+[node name="BossHealth" type="Label" parent="BossFightManager/CanvasLayer"]
+offset_left = 769.0
+offset_top = 396.0
+offset_right = 809.0
+offset_bottom = 419.0
 
 [node name="SkillsColumn" parent="." instance=ExtResource("3_85w88")]
 visible = false

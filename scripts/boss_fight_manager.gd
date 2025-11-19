@@ -1,7 +1,12 @@
+# NOTE: BossFightManager is no longer used and is only being preserved since the
+# damage logic was never ported over to combat_manager.gd or the clash system.
+# Once we have a working combat manager and clash system, this script can be freely deleted.
+
 class_name BossFightManager
 extends Node
 
-const PLAYER_SCENE = preload("res://scenes/entities/player.tscn")
+const PLAYER1_SCENE = preload("res://scenes/entities/player1.tscn")
+const PLAYER2_SCENE = preload("res://scenes/entities/player2.tscn")
 const BOSS_SCENE = preload("res://scenes/entities/boss.tscn")
 const ARROW_SCENE := preload("res://scenes/UI/boss_preview_arrows.tscn")
 const MAX_PLAYERS = 2
@@ -9,11 +14,21 @@ const MAX_PLAYERS = 2
 var players: Array[Entity] = []
 var boss: Entity
 var boss_preview_arrows : Node = null
+#vars for turn order
+var turn_order: Array[Entity] = []
+var current_turn: int = 0
+
+#health display debug
+@onready var player1Health = $CanvasLayer/Player1Health
+@onready var player2Health = $CanvasLayer/Player2Health
+@onready var bossHealth = $CanvasLayer/BossHealth
+
 
 func _ready() -> void:
 	spawn_players()
 	spawn_boss()
 	show_boss_preview() #shows lines from boss to 
+	update_health_display()
 	start_boss_fight()
 
 func spawn_players() -> void:
@@ -21,10 +36,13 @@ func spawn_players() -> void:
 	#player_positions = [Vector2(-600, -120), Vector2(20, 0)] #comment out to move back to original 
 	
 	for i in range(MAX_PLAYERS):
-		var player_instance = PLAYER_SCENE.instantiate() as Entity
+		var player_instance
+		if i == 0:
+			player_instance = PLAYER1_SCENE.instantiate() as Entity
+		if i == 1:
+			player_instance = PLAYER2_SCENE.instantiate() as Entity
 		player_instance.global_position = player_positions[i]
 		player_instance.name = "Player_%d" % (i + 1)
-		print(player_instance.name)
 		
 		add_child(player_instance)
 		players.append(player_instance)
@@ -38,6 +56,7 @@ func spawn_players() -> void:
 		var col = player_instance.get_node_or_null("SkillsColumn")
 		if col:
 			col.generate_skills()
+		print((i + 1))
 
 
 func spawn_boss() -> void:
@@ -155,6 +174,80 @@ func show_boss_preview():
 		#print("CIRCLE ->", h, " parent=", h.get_parent(), "  pos=", h.global_position)
 
 func start_boss_fight() -> void:
-	print("Boss fight started!")
-	 #Transitions to the actual boss fight
-	pass
+	#make turn order
+	_initialize_order()
+	#start combat logic
+	await _next_turn()
+
+
+func _initialize_order() -> Array[Entity]:
+	turn_order = players.duplicate()
+	turn_order.append(boss)
+	# Sort descending speed
+	turn_order.sort_custom(_compare_speed)
+	 
+	#print turn order
+	print ("TURN ORDER")
+	for entity in turn_order:
+		print("name: ", entity.name, ", speed: ", entity.speed)
+	return turn_order
+
+#func to calculate turn order; can be modified to account for speed ties?
+func _compare_speed(a,b):
+	# Higher speed first
+	return a.speed > b.speed
+
+# combat logic, called every turn
+func _next_turn() -> void:
+	var entity = turn_order[current_turn]
+	print("\n-- TURN:", entity.name, "--")
+	
+	if entity is Player:
+		await _player_turn(entity)
+	else:
+		await _boss_turn(entity)
+	
+	# Move to next turn if fight is ongoing
+	current_turn = (current_turn + 1) % turn_order.size()
+	#need to add logic for dead party as well
+	if !boss.is_dead:
+		await _next_turn()
+	else:
+		print("win")
+
+#basic player turn logic; press space to attack
+func _player_turn(player: Entity) -> void:
+	print(player.name, " is choosing an action (press space)")
+	# skill selection goes here instead of wait for space
+	await _wait_for_space()
+	print(player.name, " attacks")
+	#placeholder damage
+	boss.take_damage(10)
+	print (boss.name, " takes 10 damage")
+	update_health_display()
+
+#replace this with skill selection
+func _wait_for_space() -> void:
+	await get_tree().create_timer(0.05).timeout  # delay to avoid double input
+	while true:
+		await get_tree().process_frame
+		if Input.is_action_just_pressed("ui_accept"):
+			return
+
+#boss turn; attacks randomly based on number of skill slots
+#need to add skill slots having their own skills and targeting and stuff
+func _boss_turn(boss_ent: Entity) -> void:
+	await get_tree().create_timer(0.5).timeout
+	for i in range(boss_ent.skill_slots):
+		var target = randi_range(0, 1)
+		print ("boss attacks ", players[target].name)
+		players[target].take_damage(5)
+		print (players[target].name, " takes 5 damage")
+		update_health_display()
+		await get_tree().create_timer(0.5).timeout
+
+#update debug health display
+func update_health_display():
+	player1Health.text = "P1 HP: %d" % players[0].current_hp
+	player2Health.text = "P2 HP: %d" % players[1].current_hp
+	bossHealth.text = "Boss HP: %d" % boss.current_hp

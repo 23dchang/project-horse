@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjmuycx5idny3"]
+[gd_scene load_steps=7 format=3 uid="uid://50rmrhc2nt3g"]
 
-[ext_resource type="Texture2D" uid="uid://c6f2iduw0xyl4" path="res://icon.svg" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://d1654oremtomk" path="res://scripts/entities/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://d1654oremtomk" path="res://scripts/entities/player.gd" id="1_pe66b"]
+[ext_resource type="Texture2D" uid="uid://c6f2iduw0xyl4" path="res://icon.svg" id="2_dmgsc"]
 [ext_resource type="PackedScene" uid="uid://hxn6oa2ei7qb" path="res://scenes/UI/player_skills_bar.tscn" id="3_1ie0h"]
 [ext_resource type="PackedScene" uid="uid://dlhdnhe4yr8gw" path="res://scenes/UI/entity_health_bar.tscn" id="4_42nxq"]
 [ext_resource type="PackedScene" uid="uid://bvedsk338f7yw" path="res://scenes/UI/SkillsColumn.tscn" id="5_5u6hq"]
@@ -11,7 +11,7 @@ radius = 87.0
 height = 188.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_g2els")
+script = ExtResource("1_pe66b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -19,7 +19,7 @@ script = ExtResource("1_g2els")
 shape = SubResource("CapsuleShape2D_sh265")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3vyb7")
+texture = ExtResource("2_dmgsc")
 
 [node name="SkillsBar" parent="." instance=ExtResource("3_1ie0h")]
 visible = false

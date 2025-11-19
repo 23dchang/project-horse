@@ -3,10 +3,15 @@ extends CharacterBody2D
 
 # Combat state
 var current_hp: float = 0.0
-var max_hp: float = 50.0
+@export var max_hp: float = 50.0
 var is_defending: bool = false
 var is_dead: bool = false
-var skills: Array = []
+@export var skills: Array = []
+@export var speed: float = 5
+var max_skill_slots: int = 3
+
+# Number of allowed moves
+@export var moves: int = 1
 
 # Animation and visuals
 @onready var sprite: Sprite2D = $Sprite2D
@@ -33,8 +38,8 @@ func take_damage(amount: float) -> void:
 
 # Animation control
 func play_animation(anim_name: String) -> void:
-	if sprite and sprite.sprite_frames.has_animation(anim_name):
-		sprite.play(anim_name)
+	#if sprite and sprite.sprite_frames.has_animation(anim_name):
+		#sprite.play(anim_name)
 	
 	if animation_player and animation_player.has_animation(anim_name):
 		animation_player.play(anim_name)
