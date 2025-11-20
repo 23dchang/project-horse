@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://7dak28fxonhu"]
+
+[ext_resource type="Script" uid="uid://boptp2eo4ei3k" path="res://playground/lib_test.gd" id="1_q0ugw"]
+[ext_resource type="Script" uid="uid://p4ekdjkv0fm6" path="res://scripts/skills/skills_library_config.gd" id="2_k07aq"]
+[ext_resource type="Script" uid="uid://b6rdylld524g" path="res://scripts/entities/entity_library_config.gd" id="3_nttue"]
+
+[node name="LibraryDemo" type="Node"]
+script = ExtResource("1_q0ugw")
+
+[node name="SkillsLibConfig" type="Node" parent="."]
+script = ExtResource("2_k07aq")
+
+[node name="EntityLibConfig" type="Node" parent="."]
+script = ExtResource("3_nttue")
