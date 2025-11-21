@@ -16,7 +16,7 @@ func setup_fight() -> void:
 	init_skills()  # Setup skills for all entities
 
 func spawn_players() -> void:
-	var player_positions = [Vector2(-450, -200), Vector2(-400, 150)]
+	var player_positions = [Vector2(-600, -150), Vector2(-200, -150)]
 	
 	for i in range(MAX_PLAYERS):
 		var player_instance: Entity
@@ -49,7 +49,7 @@ func init_skills() -> void:
 		2: Skill.new(2),
 		3: Skill.new(3)
 	}
-
+	
 	# Assigns skills to each player
 	for player in players:
 		player.skills = []

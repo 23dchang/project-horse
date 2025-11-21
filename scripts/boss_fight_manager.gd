@@ -27,7 +27,7 @@ var current_turn: int = 0
 func _ready() -> void:
 	spawn_players()
 	spawn_boss()
-	show_boss_preview() #shows lines from boss to 
+	show_boss_preview() # shows lines from boss to 
 	update_health_display()
 	start_boss_fight()
 
@@ -165,7 +165,7 @@ func show_boss_preview():
 		boss_preview_arrows.add_child(arrow)
 
 		arrow.node_start = start_node
-		arrow.node_end   = end_node
+		arrow.node_end  = end_node
 
 	#print("\n=== All boss projection arrows generated (1:1 matching). ===")
 	

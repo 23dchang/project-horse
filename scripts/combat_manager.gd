@@ -18,7 +18,7 @@ func resolve_skills(skill_queue: Array) -> void:
 			print("\n[%d] %s is dead, skipping skill" % [i + 1, skill_slot.user.name])
 			continue
 		
-		# TODO: Add logic to identify clash vs free attack
+		# TODO: Add logic to identify a clash vs a free attack
 		
 		# Get target entity
 		var target: Entity = skill_slot.target_entity
@@ -28,7 +28,7 @@ func resolve_skills(skill_queue: Array) -> void:
 			print("ERROR: No valid target found!")
 			continue
 		
-		# Checks if hte target is dead
+		# Checks if the target is dead
 		if target.is_dead:
 			continue
 		

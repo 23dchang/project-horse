@@ -27,6 +27,7 @@ func _ready():
 	_initialize_subsystems()
 	start_battle()
 
+# Create and add all subsystem nodes
 func _initialize_subsystems():
 	prelim_handler = PrelimCombatHandler.new()
 	add_child(prelim_handler)
@@ -39,6 +40,7 @@ func _initialize_subsystems():
 	
 	# TODO: Initialize clash_system when ready
 
+# Begin the battle sequence
 func start_battle():
 	state = State.PRE_BATTLE
 	
@@ -57,21 +59,44 @@ func start_battle():
 	for player in players:
 		action_handler.store_original_pool(player)
 	
+	# Generate UI for players and boss
+	_setup_entity_ui()
+	
 	_start_skill_selection()
 
-# Skill selection phase
+# Setup skills bar and skills column UI for all entities
+func _setup_entity_ui():
+	# Setup player UI
+	for player in players:
+		var bar = player.get_node_or_null("SkillsBar")
+		if bar:
+			bar.show_bar()
+		
+		var col = player.get_node_or_null("SkillsColumn")
+		if col:
+			col.generate_skills()
+	
+	# Setup boss UI
+	var boss_bar = enemy.get_node_or_null("SkillsBar")
+	if boss_bar:
+		boss_bar.show_bar()
+
+# Handle the skill selection phase
 func _start_skill_selection():
 	state = State.SKILL_SELECTION
 	print("\n Phase: Skill Selection")
+	
+	# Setup skill selection for all characters
+	action_handler.setup_selection(players)
 	
 	# Boss selects its skills FIRST
 	var boss_skills = await _get_boss_skills()
 	
 	# Make boss skills visible to UI
-	action_handler.set_boss_skills(boss_skills)
+	action_handler.setup_boss(enemy, boss_skills)
 	
-	# Setup skill selection for all characters
-	action_handler.setup_selection(players)
+	# Show boss preview arrows
+	action_handler.show_boss_preview()
 	
 	# Wait for all character selections to complete
 	# UI should call action_handler.set_skill_for_slot() multiple times
@@ -90,13 +115,13 @@ func _start_skill_selection():
 	# Execute combat phase
 	_on_skills_ready(all_skills)
 
-# Boss AI skill selection (placeholder)
+# Boss AI selects skills and targets (placeholder)
 func _get_boss_skills() -> Array:
 	var skills: Array = []
 	
 	# TODO: Replace with actual boss AI logic
 	# Boss creates skills that target specific player skill slots
-	for boss_slot_index in range(3):
+	for boss_slot_index in range(5):
 		var random_skill = enemy.skills.pick_random() if enemy.skills.size() > 0 else Skill.new(1)
 		
 		# Pick a random player
@@ -122,7 +147,7 @@ func _get_boss_skills() -> Array:
 	
 	return skills
 
-# Combat phase - execute all skills in speed order
+# Execute combat phase with all selected skills
 func _on_skills_ready(skill_queue: Array):
 	state = State.COMBAT
 	print("\n Phase: Combat")
@@ -141,14 +166,14 @@ func _on_skills_ready(skill_queue: Array):
 		# Reset for next turn
 		_start_skill_selection()
 
-# Check if battle ended
+# Check if battle has ended (all players dead or boss dead)
 func _check_battle_end() -> bool:
 	var all_players_dead = players.all(func(p): return p.is_dead)
 	var enemy_dead = enemy.is_dead
 	
 	return all_players_dead or enemy_dead
 
-# Handle battle end
+# Handle battle conclusion
 func _end_battle():
 	if enemy.is_dead:
 		state = State.END_WIN

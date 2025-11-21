@@ -2,11 +2,11 @@ class_name ActionHandler
 extends Node
 
 # Selection tracking - array of arrays
-# Each player has their own array: [[skill0, skill1, skill2], [skill0, skill1, skill2]]
 var player_selections: Array = [] # Array of Arrays of SkillSlots
 var players_ref: Array = [] # Reference to player entities
 
 # Boss skills visible during selection phase
+var boss_ref: Entity = null
 var boss_skills: Array = [] # Array of SkillSlots
 
 # Track original skill decks for refreshing
@@ -15,16 +15,14 @@ var original_skill_pool: Dictionary = { } # player -> original skills array
 # Signals
 signal all_selections_complete
 signal combat_start_requested
+signal boss_preview_ready(arrows: Array)
 
-
-# Setup skill selection for multiple players
+# Setup skill selection for all players
 func setup_selection(players: Array):
 	player_selections.clear()
 	players_ref = players
 
-	# Initialize empty arrays for each player
 	for player in players:
-		# Refresh skill pool if empty
 		if player.skills.is_empty():
 			_refresh_skill_pool(player)
 
@@ -33,120 +31,75 @@ func setup_selection(players: Array):
 			player_slots.append(null)
 		player_selections.append(player_slots)
 
-
-# Store original skill pool for a player (call this during battle setup)
+# Store a player's original skill pool for later refreshing
 func store_original_pool(player: Entity):
 	if player not in original_skill_pool:
 		original_skill_pool[player] = player.skills.duplicate()
 
-
-# Refresh a player's skill pool back to their full
+# Refresh a player's skill pool from the stored original
 func _refresh_skill_pool(player: Entity):
 	if player in original_skill_pool:
 		player.skills = original_skill_pool[player].duplicate()
 
-
-# Set boss skills (called by BattleManager after boss AI selects)
-func set_boss_skills(skills: Array):
+# Setup boss reference and skills for preview and targeting
+func setup_boss(boss: Entity, skills: Array):
+	boss_ref = boss
 	boss_skills = skills
 
-
-# TODO: Should be called by UI when the player picks/changes a skill for a specific slot
-func set_skill_for_slot(
-		player_index: int,
-		slot_index: int,
-		skill: Skill, \
-		target_slot_index: int,
-) -> bool:
-	# Input Validation
+# Called by UI when the player picks/changes a skill for a specific slot
+func set_skill_for_slot(player_index: int, slot_index: int, skill: Skill, target_slot_index: int) -> bool:
 	if player_index < 0 or player_index >= player_selections.size():
 		print("Error: Invalid player index %d" % player_index)
 		return false
-
 	if slot_index < 0 or slot_index >= player_selections[player_index].size():
 		print("Error: Invalid slot index %d for player %d" % [slot_index, player_index])
 		return false
 
 	var player = players_ref[player_index]
 
-	# Validates that the skill belongs to this player's available pool
 	if skill not in player.skills:
 		print("Error: Skill not in player's available pool")
 		return false
 
-	# Create skill slot targeting the boss
-	# source_slot_index = where this skill sits in player's skill queue
-	# target_slot_index = which boss slot this targets
+	var target_entity = boss_ref if boss_ref != null else null
+
 	var skill_slot = SkillSlot.new(
-		player, # user
-		skill, # skill being used
-		slot_index, # source_slot_index (where player places it)
-		target_slot_index, # target_slot_index (which boss slot to hit)
-		-1, # target_player_index (only used by the boss)
-		boss_skills[0].user if boss_skills.size() > 0 else null, # target_entity (boss)
+		player,
+		skill,
+		slot_index,
+		target_slot_index,
+		-1,
+		target_entity,
 	)
 
-	# Remove the skill from the available pool
 	player.skills.erase(skill)
-
-	# Set the new skill slot
 	player_selections[player_index][slot_index] = skill_slot
-
-	# Check if all slots are filled
 	_check_if_complete()
-
 	return true
 
-
-# Clear a specific slot (for retargeting/reselection)
+# Clear a skill slot and return the skill to the player's pool
 func clear_slot(player_index: int, slot_index: int) -> bool:
 	if player_index < 0 or player_index >= player_selections.size():
 		return false
-
 	if slot_index < 0 or slot_index >= player_selections[player_index].size():
 		return false
 
 	var old_skill_slot = player_selections[player_index][slot_index]
-
-	# Return the skill to the pool
 	if old_skill_slot != null:
 		players_ref[player_index].skills.append(old_skill_slot.skill)
 
 	player_selections[player_index][slot_index] = null
 	return true
 
-
-# Get the current skill slot (for UI display)
+# Get the skill slot at a specific player and slot index
 func get_slot_skill(player_index: int, slot_index: int):
 	if player_index < 0 or player_index >= player_selections.size():
 		return null
-
 	if slot_index < 0 or slot_index >= player_selections[player_index].size():
 		return null
-
 	return player_selections[player_index][slot_index]
 
-
-# Get boss skill for a specific slot (for UI display)
-func get_boss_slot_skill(slot_index: int):
-	for skill_slot in boss_skills:
-		if skill_slot.source_slot_index == slot_index:
-			return skill_slot
-	return null
-
-
-# Check if all selections are complete
-func _check_if_complete():
-	for player_slots in player_selections:
-		for skill_slot in player_slots:
-			if skill_slot == null:
-				return # Still have empty slots
-
-	# Signals that the "Start Combat" button can now be interacted with
-	all_selections_complete.emit()
-
-
-# Get all selected skills from all players
+# Get all selected skills across all players
 func get_all_selected_skills() -> Array:
 	var all_skills: Array = []
 	for player_slots in player_selections:
@@ -155,59 +108,131 @@ func get_all_selected_skills() -> Array:
 				all_skills.append(skill_slot)
 	return all_skills
 
-
-# Get number of filled slots for a specific player (for UI display)
-func get_filled_slot_count(player_index: int) -> int:
-	if player_index < 0 or player_index >= player_selections.size():
-		return 0
-
-	var count = 0
-	for skill_slot in player_selections[player_index]:
-		if skill_slot != null:
-			count += 1
-	return count
-
-
-# Get remaining selections for a specific player (for UI display)
-func get_remaining_selections(player_index: int) -> int:
-	if player_index < 0 or player_index >= player_selections.size():
-		return 0
-
-	var total_slots = player_selections[player_index].size()
-	return total_slots - get_filled_slot_count(player_index)
-
-
-# Get available skills for a player (for UI display)
-func get_available_skills(player_index: int) -> Array:
-	if player_index < 0 or player_index >= players_ref.size():
-		return []
-
-	return players_ref[player_index].skills
-
-
-# Called by UI "Start Combat" button
+# Emit signal to request combat start
 func request_combat_start():
 	combat_start_requested.emit()
+
+# Check if all slots are filled and emit completion signal
+func _check_if_complete():
+	for player_slots in player_selections:
+		for skill_slot in player_slots:
+			if skill_slot == null:
+				return
+	all_selections_complete.emit()
+
+# Get all player skill nodes from the scene tree (used by show_boss_preview)
+func get_player_skill_nodes() -> Array[Control]:
+	var result : Array[Control] = []
+
+	for player in players_ref:
+		var root: Node = player.get_node_or_null("SkillsBar/TripleSkills/EmptySkillsContainer")
+		if root == null:
+			continue
+
+		for child in root.get_children():
+			if child is ColorRect or child is TextureRect:
+				result.append(child)
+
+	return result
+
+# Get all boss skill nodes from the scene tree (used by show_boss_preview)
+func get_boss_skill_nodes() -> Array[Control]:
+	var result : Array[Control] = []
+	
+	if boss_ref == null:
+		print("ERROR: Boss reference is null. Call setup_boss() first.")
+		return result
+	
+	var root: Node = boss_ref.get_node_or_null("SkillsBar/TripleSkills/EmptySkillsContainer")
+	if root == null:
+		print("ERROR: Boss TripleSkills not found.")
+		return result
+	
+	for child in root.get_children():
+		if child is ColorRect or child is TextureRect:
+			result.append(child)
+	
+	return result
+
+# Create and display arrows showing boss skill targeting
+func show_boss_preview():
+	if boss_ref == null:
+		print("ERROR: Boss reference is null. Cannot show preview.")
+		return
+	
+	var boss_preview_arrows: Node = boss_ref.get_node_or_null("SkillsBar/BossPreviewArrows")
+	if boss_preview_arrows == null:
+		print("ERROR: BossPreviewArrows node not found on boss.")
+		return
+	
+	for child in boss_preview_arrows.get_children():
+		child.queue_free()
+	
+	var boss_skill_nodes := get_boss_skill_nodes()
+	var player_skill_nodes := get_player_skill_nodes()
+
+	if boss_skill_nodes.is_empty():
+		print("ERROR: No boss skills detected.")
+		return
+	if player_skill_nodes.is_empty():
+		print("ERROR: No player skills detected.")
+		return
+
+	var arrows_data: Array = []
+	
+	for i in range(boss_skills.size()):
+		if i >= boss_skill_nodes.size():
+			break
+			
+		var skill_slot: SkillSlot = boss_skills[i]
+		var boss_node = boss_skill_nodes[i]
+		
+		var target_node = _find_target_skill_node(skill_slot, player_skill_nodes)
+		
+		if target_node != null:
+			const ARROW_SCENE := preload("res://scenes/UI/boss_preview_arrows.tscn")
+			var arrow = ARROW_SCENE.instantiate()
+			boss_preview_arrows.add_child(arrow)
+			arrow.node_start = boss_node
+			arrow.node_end = target_node
+			
+			arrows_data.append({
+				"arrow": arrow,
+				"from": boss_node,
+				"to": target_node,
+				"skill": skill_slot.skill
+			})
+
+	boss_preview_ready.emit(arrows_data)
+
+# Find the target skill node based on skill slot targeting information
+func _find_target_skill_node(skill_slot: SkillSlot, player_skill_nodes: Array[Control]) -> Control:
+	if skill_slot.target_player_index < 0 or skill_slot.target_player_index >= players_ref.size():
+		return null
+	
+	var node_offset = 0
+	
+	for i in range(skill_slot.target_player_index):
+		node_offset += players_ref[i].max_skill_slots
+	
+	node_offset += skill_slot.target_slot_index
+	
+	if node_offset < player_skill_nodes.size():
+		return player_skill_nodes[node_offset]
+	
+	return null
 
 
 # Helper class representing a skill placed in a slot
 class SkillSlot:
-	var user # Entity performing the skill
-	var skill: Skill # The skill being used
-	var source_slot_index: int # Which slot this skill occupies (i.e. 0, 1, 2)
-	var target_slot_index: int # Which slot is being targeted (i.e. 0, 1, 2)
-	var target_player_index: int = -1 # Which player (for boss skills only)
-	var target_entity # Direct reference to the entity being attacked
+	var user
+	var skill: Skill
+	var source_slot_index: int
+	var target_slot_index: int
+	var target_player_index: int = -1
+	var target_entity
 
-
-	func _init(
-			_user,
-			_skill: Skill,
-			_source_slot_index: int,
-			_target_slot_index: int, \
-			_target_player_index: int = -1,
-			_target_entity = null,
-	):
+	func _init(_user, _skill: Skill, _source_slot_index: int, _target_slot_index: int, _target_player_index: int = -1, _target_entity = null):
 		user = _user
 		skill = _skill
 		source_slot_index = _source_slot_index
