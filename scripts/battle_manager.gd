@@ -13,7 +13,7 @@ enum State {
 var state: State = State.PRE_BATTLE
 
 # Subsystems
-var prelim_handler: PrelimCombatHandler
+#var prelim_handler: PrelimCombatHandler
 var action_handler: ActionHandler
 var combat_manager: CombatManager
 var clash_system: ClashSystem
@@ -22,6 +22,8 @@ var clash_system: ClashSystem
 var players: Array = []
 var enemy: Entity
 
+@onready var prelim_handler: PrelimCombatHandler = $BossFightManager
+
 # Initialize subsystems and start battle
 func _ready():
 	_initialize_subsystems()
@@ -29,8 +31,8 @@ func _ready():
 
 # Create and add all subsystem nodes
 func _initialize_subsystems():
-	prelim_handler = PrelimCombatHandler.new()
-	add_child(prelim_handler)
+	#prelim_handler = PrelimCombatHandler.new()
+	#add_child(prelim_handler)
 	
 	action_handler = ActionHandler.new()
 	add_child(action_handler)

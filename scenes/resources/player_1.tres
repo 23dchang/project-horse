@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EntitySchema" load_steps=6 format=3 uid="uid://bnsq3m0n6vblg"]
+
+[ext_resource type="Texture2D" uid="uid://c6f2iduw0xyl4" path="res://icon.svg" id="1_213sk"]
+[ext_resource type="Script" uid="uid://py2ru281e44f" path="res://scripts/entities/entity_schema.gd" id="1_j7456"]
+[ext_resource type="Script" uid="uid://c73rfbsmvew6j" path="res://scripts/skills/skill.gd" id="2_j7456"]
+[ext_resource type="Texture2D" uid="uid://dsnlxit2ht1x7" path="res://assets/UI_Visuals/Skills_Icons/light_attack.png" id="3_213sk"]
+
+[sub_resource type="Resource" id="Resource_21vbu"]
+script = ExtResource("2_j7456")
+name = "Light Attack"
+icon = ExtResource("3_213sk")
+base_roll = 10.0
+bonus_roll = 16.0
+coins = 3
+metadata/_custom_type_script = "uid://c73rfbsmvew6j"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_j7456")
+name = "Pistachio"
+icon = ExtResource("1_213sk")
+max_hp = 100.0
+skills = Array[ExtResource("2_j7456")]([SubResource("Resource_21vbu"), SubResource("Resource_21vbu"), SubResource("Resource_21vbu")])
+speed = 10.0
+moves = 3

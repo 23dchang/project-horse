@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1w2igb4qfuxl"]
+
+[ext_resource type="Script" uid="uid://b7y5bde2dke7a" path="res://demo/clash_sim.gd" id="1_h0cs1"]
+[ext_resource type="Texture2D" uid="uid://csfjhtuiraqfw" path="res://assets/UI_Visuals/custom_drawing/Screenshot 2025-11-12 at 11.24.58 AM.png" id="2_1sg3j"]
+[ext_resource type="Texture2D" uid="uid://6ioek1neenc6" path="res://assets/UI_Visuals/custom_drawing/Screenshot 2025-11-12 at 11.25.16 AM.png" id="3_id0bs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utl7j"]
+size = Vector2(0.4645714, 1.209037)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ovr8"]
+
+[sub_resource type="Gradient" id="Gradient_474qs"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcdb3"]
+gradient = SubResource("Gradient_474qs")
+fill_from = Vector2(0, 1)
+
+[node name="ClashPoc" type="Node2D"]
+script = ExtResource("1_h0cs1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="P2" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(644, 0)
+scale = Vector2(897.60156, 277.08005)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2"]
+position = Vector2(0.00055704004, -0.0018045327)
+shape = SubResource("RectangleShape2D_utl7j")
+
+[node name="Sprite2D" type="Sprite2D" parent="P2"]
+scale = Vector2(0.00081998075, 0.0019156919)
+texture = ExtResource("2_1sg3j")
+
+[node name="P1" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(-630, 0)
+scale = Vector2(29.96, 16.645721)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1"]
+scale = Vector2(0.67022693, 0.99999994)
+shape = SubResource("RectangleShape2D_5ovr8")
+
+[node name="Sprite2D" type="Sprite2D" parent="P1"]
+rotation = 3.1415927
+scale = Vector2(0.033110786, -0.038997646)
+texture = ExtResource("3_id0bs")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(29.96, 16.645721)
+texture = SubResource("GradientTexture2D_qcdb3")

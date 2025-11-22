@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dx3qbct5wm8nq"]
+
+[ext_resource type="Script" uid="uid://c73rfbsmvew6j" path="res://scripts/skills/skill.gd" id="1_i2llp"]
+[ext_resource type="Texture2D" uid="uid://dsnlxit2ht1x7" path="res://assets/UI_Visuals/Skills_Icons/light_attack.png" id="1_mweub"]
+
+[resource]
+script = ExtResource("1_i2llp")
+name = "Light Attack"
+icon = ExtResource("1_mweub")
+base_roll = 10.0
+bonus_roll = 16.0
+coins = 3
+metadata/_custom_type_script = "uid://c73rfbsmvew6j"

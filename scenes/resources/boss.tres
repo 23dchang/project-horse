@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EntitySchema" load_steps=6 format=3 uid="uid://bljufy3i6mh2e"]
+
+[ext_resource type="Script" uid="uid://py2ru281e44f" path="res://scripts/entities/entity_schema.gd" id="1_osr7o"]
+[ext_resource type="Texture2D" uid="uid://c6f2iduw0xyl4" path="res://icon.svg" id="1_rxvjw"]
+[ext_resource type="Script" uid="uid://c73rfbsmvew6j" path="res://scripts/skills/skill.gd" id="2_xuo12"]
+[ext_resource type="Texture2D" uid="uid://bk3yokjjkicy4" path="res://assets/UI_Visuals/custom_drawing/red arrowhead.png" id="3_xuo12"]
+
+[sub_resource type="Resource" id="Resource_rxvjw"]
+script = ExtResource("2_xuo12")
+skill_id = 1
+name = "DIE"
+icon = ExtResource("3_xuo12")
+base_roll = 10000000000.0
+bonus_roll = 1.0
+metadata/_custom_type_script = "uid://c73rfbsmvew6j"
+
+[resource]
+script = ExtResource("1_osr7o")
+name = "Hate you"
+icon = ExtResource("1_rxvjw")
+max_hp = 1000.0
+skills = Array[ExtResource("2_xuo12")]([SubResource("Resource_rxvjw")])
+speed = 999.0
+metadata/_custom_type_script = "uid://py2ru281e44f"

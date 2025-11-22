@@ -1,59 +1,34 @@
 class_name EntityLibrary
 extends RefCounted
 
-var entity_ct: int = 0
-var skills_lib: SkillsLibrary
+var game_data: Data
 
-var lib_config: EntityLibraryConfig
+# Take game data
+func _init(data: Data) -> void:
+	game_data = data
 
-# TODO: maybe generate random enemy entities 
-
-# INFO: For fixed boss/player skill sets, ingest here in the Entity
-# library and assign the sets to our respective characters.
-func _init(config: EntityLibraryConfig, skills_library: SkillsLibrary) -> void:
-	lib_config = config
-	skills_lib = skills_library
-
-
-## Populates an Entity object's skills attribute. [br]
-## [code]entity[/code] is the Entity object to be populated. [br]
-## [code]mode[/code] is an integer. 0 is auto generate skills,
-## and 1 is load fixed skillset (1 is not implemented yet).
-func initialize_skills(entity: Entity, mode: int = 0) -> void:
-	# Mode 0 is auto generate skills
-	# Mode 1 loads pre set skill sets.
-	# Concern - how to distinguish entities for skill loading?
-	# Many options, open to discussion.
-	if mode:
-		# TODO: load_skills logic
+# Load the specific entity's data
+## Updates [code]entity[/code]'s attributes with the 
+## custom defined resource core game data.
+func load_data(entity:Entity) -> void:
+	var entity_data:EntitySchema = null
+	
+	if entity is Player:
+		entity_data = game_data.player_list.pop_front()
+	elif entity is Boss:
+		entity_data = game_data.boss_list.pop_front()
+	
+	if not entity_data:
+		Logging.log("What is going on. Couldn't find entity_data")
 		return
-
-	var skills: Array[Skill]
-	var _seed: int = _compute_seed(entity)
-
-	var gen: SkillsLibrary.SkillGenerator = skills_lib.generator(_seed)
-	var entity_skillset_specs: Dictionary = lib_config.entity_skillset_specs
-	var skill_schema: SkillSchema = SkillSchema.new()
-
-	for tier in entity_skillset_specs.keys():
-		var skill_cards_ct: int = entity_skillset_specs[tier]
-		skill_schema.set_tier(tier)
-
-		for ct in range(skill_cards_ct):
-			# INFO: for fine grain control load skills instead.
-			# Can also discuss on how to open up
-			# more of the abstraction layers.
-			skills.push_back(gen.gen_random_skill(skill_schema))
-
-	# WARNING: bad practice here.
-	entity.skills = skills
-	entity_ct += 1
-
-
-func _compute_seed(entity: Entity) -> int:
-	var _seed: int = entity_ct
-	var sprite: Sprite2D = entity.sprite
-	var resource_path: String = sprite.texture.resource_path if sprite else ""
-	if not resource_path.is_empty():
-		_seed += resource_path.hash()
-	return _seed
+	
+	for member in entity_data.get_property_list():
+		if member.usage & PROPERTY_USAGE_STORAGE != 0 \
+		and member.usage & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
+			var member_name:String = member.name
+			
+			# tmp work around
+			if member_name == "icon":
+				pass
+			else:
+				entity[member_name] = entity_data[member_name]

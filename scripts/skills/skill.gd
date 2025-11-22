@@ -2,6 +2,8 @@ class_name Skill
 extends Resource
 
 @export var skill_id: int = 0
+@export var name:String = "More cats when..."
+@export var icon:Texture = null
 @export var base_roll: float = 0.0
 @export var bonus_roll: float = 0.0
 @export var coins: int = 1

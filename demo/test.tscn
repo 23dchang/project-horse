@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjhre3ucpf4jr"]
+
+[ext_resource type="Script" uid="uid://boptp2eo4ei3k" path="res://demo/lib_test.gd" id="1_8gayr"]
+[ext_resource type="Script" uid="uid://x6f77lmyiwp8" path="res://scripts/entities/data.gd" id="1_gamli"]
+[ext_resource type="Script" uid="uid://py2ru281e44f" path="res://scripts/entities/entity_schema.gd" id="3_jbfwl"]
+[ext_resource type="Resource" uid="uid://bnsq3m0n6vblg" path="res://scenes/resources/player_1.tres" id="4_rarak"]
+[ext_resource type="Resource" uid="uid://bljufy3i6mh2e" path="res://scenes/resources/boss.tres" id="5_rarak"]
+
+[node name="Test" type="Node"]
+script = ExtResource("1_8gayr")
+
+[node name="GameData" type="Node" parent="."]
+script = ExtResource("1_gamli")
+player_list = Array[ExtResource("3_jbfwl")]([ExtResource("4_rarak"), ExtResource("4_rarak")])
+boss_list = Array[ExtResource("3_jbfwl")]([ExtResource("5_rarak")])
