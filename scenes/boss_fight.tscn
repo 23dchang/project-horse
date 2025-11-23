@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxup8n4v6j744"]
+[gd_scene load_steps=6 format=3 uid="uid://dxup8n4v6j744"]
 
-[ext_resource type="Script" uid="uid://6d1035bdpl8y" path="res://scripts/boss_fight_manager.gd" id="1_1hapx"]
-[ext_resource type="Script" uid="uid://cqwc4648ewx74" path="res://scripts/prelim_combat_handler.gd" id="3_7ydql"]
+[ext_resource type="Script" uid="uid://dyuqky6004u2x" path="res://scripts/battle_manager.gd" id="2_1hapx"]
 [ext_resource type="PackedScene" uid="uid://bvedsk338f7yw" path="res://scenes/UI/SkillsColumn.tscn" id="3_85w88"]
 
+[sub_resource type="Theme" id="Theme_1hapx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ydql"]
+bg_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hapx"]
+bg_color = Color(0.71629584, 0.7162964, 0.716296, 1)
+
 [node name="BossFight" type="Node2D"]
-script = ExtResource("1_1hapx")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -955.0
@@ -18,24 +24,23 @@ text = "BOSS FIGHT SCENE"
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="BossFightManager" type="Node" parent="."]
-script = ExtResource("3_7ydql")
+script = ExtResource("2_1hapx")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
+[node name="CanvasLayer" type="CanvasLayer" parent="BossFightManager"]
 
-[node name="Player1Health" type="Label" parent="CanvasLayer"]
+[node name="Player1Health" type="Label" parent="BossFightManager/CanvasLayer"]
 offset_left = 59.0
 offset_top = 54.0
 offset_right = 99.0
 offset_bottom = 77.0
 
-[node name="Player2Health" type="Label" parent="CanvasLayer"]
+[node name="Player2Health" type="Label" parent="BossFightManager/CanvasLayer"]
 offset_left = 141.0
 offset_top = 413.0
 offset_right = 181.0
 offset_bottom = 436.0
 
-[node name="BossHealth" type="Label" parent="CanvasLayer"]
+[node name="BossHealth" type="Label" parent="BossFightManager/CanvasLayer"]
 offset_left = 769.0
 offset_top = 396.0
 offset_right = 809.0
@@ -47,3 +52,20 @@ offset_left = -381.0
 offset_top = 83.0
 offset_right = -381.0
 offset_bottom = 83.0
+
+[node name="StartCombat" type="Button" parent="."]
+offset_left = 500.0
+offset_top = 142.0
+offset_right = 669.0
+offset_bottom = 235.0
+theme = SubResource("Theme_1hapx")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.017732361, 0.01773239, 0.017732479, 1)
+theme_override_colors/font_pressed_color = Color(0.00033390365, 0.0003339036, 0.00033390356, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.011087579, 0.011087578, 0.01108758, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_7ydql")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1hapx")
+text = "SEND IT"
+
+[connection signal="pressed" from="StartCombat" to="BossFightManager" method="_on_start_combat_pressed"]

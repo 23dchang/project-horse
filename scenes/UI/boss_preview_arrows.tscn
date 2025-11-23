@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://da1rs613vwf7w"]
+[gd_scene load_steps=2 format=3 uid="uid://da1rs613vwf7w"]
 
 [ext_resource type="Script" uid="uid://dhm0nn33yv7lw" path="res://scripts/UI/boss_preview_arrows.gd" id="1_8exav"]
-[ext_resource type="Script" uid="uid://cw18487mrpi43" path="res://scripts/circle_head.gd" id="2_xlvtl"]
-[ext_resource type="Texture2D" uid="uid://bk73f1drlx3cw" path="res://assets/UI_Visuals/custom_drawing/circle-png-15288.png" id="3_yoj45"]
 
 [node name="BossPreviewArrows" type="Line2D"]
 script = ExtResource("1_8exav")
@@ -12,18 +10,6 @@ trim_start = -20.0
 metadata/_edit_vertical_guides_ = [1927.0]
 metadata/_edit_horizontal_guides_ = [1076.0]
 
-[node name="CircleHead1" type="TextureRect" parent="."]
-visible = false
-offset_right = 2200.0
-offset_bottom = 2200.0
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_yoj45")
-expand_mode = 1
-
 [node name="OutlineLine" type="Line2D" parent="."]
 
 [node name="MainLine" type="Line2D" parent="."]
-
-[node name="CircleHead" type="Node2D" parent="."]
-visible = false
-script = ExtResource("2_xlvtl")

@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://sfsrb46ufhh0"]
+[gd_scene load_steps=7 format=3 uid="uid://sfsrb46ufhh0"]
 
 [ext_resource type="Script" uid="uid://c8xl5gilwultu" path="res://scripts/entities/boss.gd" id="1_mdhvr"]
 [ext_resource type="Texture2D" uid="uid://c6f2iduw0xyl4" path="res://icon.svg" id="2_ac02r"]
 [ext_resource type="PackedScene" uid="uid://kyry78favrgh" path="res://scenes/UI/boss_skills_bar.tscn" id="3_ac02r"]
 [ext_resource type="PackedScene" uid="uid://dlhdnhe4yr8gw" path="res://scenes/UI/entity_health_bar.tscn" id="4_g24gc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh265"]
-radius = 87.0
-height = 188.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4agdh"]
+size = Vector2(134, 134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g24gc"]
+size = Vector2(130, 132)
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_mdhvr")
@@ -16,7 +18,12 @@ speed = 4.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_sh265")
+shape = SubResource("RectangleShape2D_4agdh")
+
+[node name="HoverArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
+shape = SubResource("RectangleShape2D_g24gc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.98797375, 0.45552784, 0.3811656, 1)
@@ -37,3 +44,6 @@ offset_right = -112.0
 offset_bottom = 61.0
 scale = Vector2(0.6, 0.6)
 metadata/_edit_vertical_guides_ = [0.0, 1920.0, 990.0]
+
+[connection signal="mouse_entered" from="HoverArea" to="." method="_on_hover_area_mouse_entered"]
+[connection signal="mouse_exited" from="HoverArea" to="." method="_on_hover_area_mouse_exited"]

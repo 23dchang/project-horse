@@ -6,6 +6,8 @@ extends Resource
 @export var bonus_roll: float = 0.0
 @export var coins: int = 1
 @export var odds: float = 0.5
+@export var icon_texture : Texture2D
+# TODO: field for skill speed number next to icon...?
 
 
 func _init(
@@ -42,3 +44,4 @@ func heads() -> bool:
 
 func deduct_coin() -> void:
 	coins = max(coins - 1, 0)
+	

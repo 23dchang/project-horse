@@ -1,21 +1,280 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvedsk338f7yw"]
+[gd_scene load_steps=7 format=3 uid="uid://bvedsk338f7yw"]
 
 [ext_resource type="Script" uid="uid://dq2femc5csbq4" path="res://scripts/UI/player_skill_columns.gd" id="1_e7oh1"]
 [ext_resource type="Texture2D" uid="uid://csfjhtuiraqfw" path="res://assets/UI_Visuals/custom_drawing/Screenshot 2025-11-12 at 11.24.58 AM.png" id="2_i740y"]
 [ext_resource type="Texture2D" uid="uid://bnoje7i2okjtp" path="res://assets/UI_Visuals/Skills_Icons/guard.png" id="2_vc42p"]
 [ext_resource type="Texture2D" uid="uid://ccapfxxjtvyfw" path="res://assets/UI_Visuals/Skills_Icons/melee_buff.png" id="3_i740y"]
 [ext_resource type="Texture2D" uid="uid://dsnlxit2ht1x7" path="res://assets/UI_Visuals/Skills_Icons/light_attack.png" id="4_0iegi"]
+[ext_resource type="PackedScene" uid="uid://bxo7gl2mf7ho4" path="res://scenes/UI/skill_description_box.tscn" id="6_i740y"]
 
 [node name="SkillsColumn" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_right = -60.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_e7oh1")
+
+[node name="LayoutAnchorFixer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 10.97998
+offset_bottom = 2.5809708
+
+[node name="TripleCol" type="Control" parent="LayoutAnchorFixer"]
+anchors_preset = 0
+offset_left = 216.04404
+offset_top = -15.384003
+offset_right = 778.04407
+offset_bottom = 564.61597
+
+[node name="GreyBackground" type="ColorRect" parent="LayoutAnchorFixer/TripleCol"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 32.0
+offset_right = 461.0
+offset_bottom = 333.0
+color = Color(0.84705883, 0.84705883, 0.84705883, 1)
+
+[node name="Portrait" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PortraitBG2" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Portrait"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 390.0
+offset_right = 180.0
+offset_bottom = 530.0
+color = Color(0.047058824, 0.101960786, 0.09803922, 1)
+
+[node name="PlayerName" type="Label" parent="LayoutAnchorFixer/TripleCol/Portrait/PortraitBG2"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 109.0
+offset_right = 46.0
+offset_bottom = 132.0
+text = "Player 1"
+
+[node name="Portrait" type="TextureRect" parent="LayoutAnchorFixer/TripleCol/Portrait/PortraitBG2"]
+layout_mode = 0
+offset_left = 7.9999995
+offset_top = 8.999999
+offset_right = 1007.9999
+offset_bottom = 959.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_i740y")
+
+[node name="Column1" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_left = 56.0
+offset_right = 96.0
+offset_bottom = 40.0
+
+[node name="ColumnName" type="Label" parent="LayoutAnchorFixer/TripleCol/Column1"]
+visible = false
+layout_mode = 0
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 124.0
+offset_bottom = 30.0
+text = "Skill Column 1"
+
+[node name="SkillsContainer" type="GridContainer" parent="LayoutAnchorFixer/TripleCol/Column1"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 46.0
+offset_right = 126.000015
+offset_bottom = 386.0
+scale = Vector2(0.8, 0.8)
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 20
+
+[node name="Skill1" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column1/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill2" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column1/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill3" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column1/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="SpeedBG" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column1"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 343.0
+offset_right = 123.0
+offset_bottom = 377.0
+color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
+
+[node name="SpeedValue" type="Label" parent="LayoutAnchorFixer/TripleCol/Column1/SpeedBG"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 85.0
+offset_bottom = 28.0
+text = "Speed: 8"
+
+[node name="Column2" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_left = 56.0
+offset_right = 96.0
+offset_bottom = 40.0
+
+[node name="ColumnName" type="Label" parent="LayoutAnchorFixer/TripleCol/Column2"]
+visible = false
+layout_mode = 0
+offset_left = 155.0
+offset_top = 7.0
+offset_right = 264.0
+offset_bottom = 30.0
+text = "Skill Column 2"
+
+[node name="SkillsContainer" type="GridContainer" parent="LayoutAnchorFixer/TripleCol/Column2"]
+layout_mode = 0
+offset_left = 165.99998
+offset_top = 46.0
+offset_right = 266.0
+offset_bottom = 386.0
+scale = Vector2(0.8, 0.8)
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 20
+
+[node name="Skill4" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column2/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill5" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column2/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill6" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column2/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="SpeedBG" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column2"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 343.0
+offset_right = 265.0
+offset_bottom = 377.0
+color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
+
+[node name="SpeedValue" type="Label" parent="LayoutAnchorFixer/TripleCol/Column2/SpeedBG"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 5.0
+offset_right = 88.0
+offset_bottom = 28.0
+text = "Speed: 8"
+
+[node name="Column3" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_left = 56.0
+offset_right = 96.0
+offset_bottom = 40.0
+
+[node name="ColumnName" type="Label" parent="LayoutAnchorFixer/TripleCol/Column3"]
+visible = false
+layout_mode = 0
+offset_left = 296.0
+offset_top = 8.0
+offset_right = 405.0
+offset_bottom = 31.0
+text = "Skill Column 3"
+
+[node name="SkillsContainer" type="GridContainer" parent="LayoutAnchorFixer/TripleCol/Column3"]
+layout_mode = 0
+offset_left = 306.99997
+offset_top = 47.0
+offset_right = 407.0
+offset_bottom = 387.0
+scale = Vector2(0.8, 0.8)
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 20
+
+[node name="Skill7" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column3/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill8" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column3/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="Skill9" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column3/SkillsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+color = Color(0.00011382803, 0.00011382803, 0.00011382803, 1)
+
+[node name="SpeedBG" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/Column3"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 343.0
+offset_right = 405.0
+offset_bottom = 377.0
+color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
+
+[node name="SpeedValue" type="Label" parent="LayoutAnchorFixer/TripleCol/Column3/SpeedBG"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 5.0
+offset_right = 88.0
+offset_bottom = 28.0
+text = "Speed: 8"
+
+[node name="BlockButton1" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PortraitBG2" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/BlockButton1"]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 390.0
+offset_right = 321.0
+offset_bottom = 530.0
+color = Color(0.27840054, 0.44432136, 0.43224367, 1)
+
+[node name="Button" type="Label" parent="LayoutAnchorFixer/TripleCol/BlockButton1/PortraitBG2"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 32.0
+offset_right = 92.0
+offset_bottom = 107.0
+text = "BLOCK
+BUTTON
+   WIP"
+
+[node name="BlockButton2" type="Control" parent="LayoutAnchorFixer/TripleCol"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PortraitBG2" type="ColorRect" parent="LayoutAnchorFixer/TripleCol/BlockButton2"]
+layout_mode = 0
+offset_left = 347.0
+offset_top = 390.0
+offset_right = 462.0
+offset_bottom = 530.0
+color = Color(0.27840054, 0.44432136, 0.43224367, 1)
+
+[node name="Button" type="Label" parent="LayoutAnchorFixer/TripleCol/BlockButton2/PortraitBG2"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 32.0
+offset_right = 92.0
+offset_bottom = 107.0
+text = "BLOCK
+BUTTON
+   WIP"
 
 [node name="SingleCol" type="Control" parent="."]
 visible = false
@@ -282,237 +541,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_0iegi")
 
-[node name="TripleCol" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="GreyBackground" type="ColorRect" parent="TripleCol"]
-layout_mode = 0
-offset_left = 65.0
-offset_top = 32.0
-offset_right = 461.0
-offset_bottom = 333.0
-color = Color(0.84705883, 0.84705883, 0.84705883, 1)
-
-[node name="Portrait" type="Control" parent="TripleCol"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PortraitBG2" type="ColorRect" parent="TripleCol/Portrait"]
-layout_mode = 0
-offset_left = 65.0
-offset_top = 390.0
-offset_right = 180.0
-offset_bottom = 530.0
-color = Color(0.047058824, 0.101960786, 0.09803922, 1)
-
-[node name="PlayerName" type="Label" parent="TripleCol/Portrait/PortraitBG2"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 109.0
-offset_right = 46.0
-offset_bottom = 132.0
-text = "Player 1"
-
-[node name="Portrait" type="TextureRect" parent="TripleCol/Portrait/PortraitBG2"]
-layout_mode = 0
-offset_left = 7.9999995
-offset_top = 8.999999
-offset_right = 1007.9999
-offset_bottom = 959.0
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_i740y")
-
-[node name="Column1" type="Control" parent="TripleCol"]
-anchors_preset = 0
-offset_left = 56.0
-offset_right = 96.0
-offset_bottom = 40.0
-
-[node name="ColumnName" type="Label" parent="TripleCol/Column1"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 7.0
-offset_right = 124.0
-offset_bottom = 30.0
-text = "Skill Column 1"
-
-[node name="SkillsContainer" type="GridContainer" parent="TripleCol/Column1"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 46.0
-offset_right = 126.000015
-offset_bottom = 386.0
-scale = Vector2(0.8, 0.8)
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 20
-
-[node name="Skill1" type="TextureRect" parent="TripleCol/Column1/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("2_vc42p")
-
-[node name="Skill2" type="TextureRect" parent="TripleCol/Column1/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("3_i740y")
-
-[node name="Skill3" type="TextureRect" parent="TripleCol/Column1/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("4_0iegi")
-
-[node name="SpeedBG" type="ColorRect" parent="TripleCol/Column1"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 343.0
-offset_right = 123.0
-offset_bottom = 377.0
-color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
-
-[node name="SpeedValue" type="Label" parent="TripleCol/Column1/SpeedBG"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 5.0
-offset_right = 85.0
-offset_bottom = 28.0
-text = "Speed: 8"
-
-[node name="Column2" type="Control" parent="TripleCol"]
-anchors_preset = 0
-offset_left = 56.0
-offset_right = 96.0
-offset_bottom = 40.0
-
-[node name="ColumnName" type="Label" parent="TripleCol/Column2"]
-layout_mode = 0
-offset_left = 155.0
-offset_top = 7.0
-offset_right = 264.0
-offset_bottom = 30.0
-text = "Skill Column 2"
-
-[node name="SkillsContainer" type="GridContainer" parent="TripleCol/Column2"]
-layout_mode = 0
-offset_left = 165.99998
-offset_top = 46.0
-offset_right = 266.0
-offset_bottom = 386.0
-scale = Vector2(0.8, 0.8)
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 20
-
-[node name="Skill1" type="TextureRect" parent="TripleCol/Column2/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("2_vc42p")
-
-[node name="Skill2" type="TextureRect" parent="TripleCol/Column2/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("3_i740y")
-
-[node name="Skill3" type="TextureRect" parent="TripleCol/Column2/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("4_0iegi")
-
-[node name="SpeedBG" type="ColorRect" parent="TripleCol/Column2"]
-layout_mode = 0
-offset_left = 150.0
-offset_top = 343.0
-offset_right = 265.0
-offset_bottom = 377.0
-color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
-
-[node name="SpeedValue" type="Label" parent="TripleCol/Column2/SpeedBG"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 5.0
-offset_right = 88.0
-offset_bottom = 28.0
-text = "Speed: 8"
-
-[node name="Column3" type="Control" parent="TripleCol"]
-anchors_preset = 0
-offset_left = 56.0
-offset_right = 96.0
-offset_bottom = 40.0
-
-[node name="ColumnName" type="Label" parent="TripleCol/Column3"]
-layout_mode = 0
-offset_left = 296.0
-offset_top = 8.0
-offset_right = 405.0
-offset_bottom = 31.0
-text = "Skill Column 3"
-
-[node name="SkillsContainer" type="GridContainer" parent="TripleCol/Column3"]
-layout_mode = 0
-offset_left = 306.99997
-offset_top = 47.0
-offset_right = 407.0
-offset_bottom = 387.0
-scale = Vector2(0.8, 0.8)
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 20
-
-[node name="Skill1" type="TextureRect" parent="TripleCol/Column3/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("2_vc42p")
-
-[node name="Skill2" type="TextureRect" parent="TripleCol/Column3/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("3_i740y")
-
-[node name="Skill3" type="TextureRect" parent="TripleCol/Column3/SkillsContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-texture = ExtResource("4_0iegi")
-
-[node name="SpeedBG" type="ColorRect" parent="TripleCol/Column3"]
-layout_mode = 0
-offset_left = 290.0
-offset_top = 343.0
-offset_right = 405.0
-offset_bottom = 377.0
-color = Color(0.8735121, 0.6851966, 7.70092e-07, 1)
-
-[node name="SpeedValue" type="Label" parent="TripleCol/Column3/SpeedBG"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 5.0
-offset_right = 88.0
-offset_bottom = 28.0
-text = "Speed: 8"
-
-[node name="BlockButton" type="Control" parent="TripleCol"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PortraitBG2" type="ColorRect" parent="TripleCol/BlockButton"]
-layout_mode = 0
-offset_left = 206.0
-offset_top = 390.0
-offset_right = 321.0
-offset_bottom = 530.0
-color = Color(0.27840054, 0.44432136, 0.43224367, 1)
-
-[node name="Button" type="Label" parent="TripleCol/BlockButton/PortraitBG2"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 32.0
-offset_right = 92.0
-offset_bottom = 107.0
-text = "BLOCK
-BUTTON
-   WIP"
-
 [node name="Label" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -522,3 +550,13 @@ offset_right = 1008.0
 offset_bottom = 70.0
 theme_override_font_sizes/font_size = 40
 text = "SKILLS COLUMN SCENE"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="SkillDescriptionBox" parent="CanvasLayer" instance=ExtResource("6_i740y")]
+visible = false
+offset_left = 539.0
+offset_top = 28.0
+offset_right = 539.0
+offset_bottom = 28.0

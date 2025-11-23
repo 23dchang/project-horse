@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://kyry78favrgh"]
 
-[ext_resource type="Script" uid="uid://bx3qaeah6707l" path="res://scripts/UI/player_skills_bar.gd" id="1_e3da1"]
+[ext_resource type="Script" uid="uid://csh3j1fwfr2tj" path="res://scripts/UI/boss_skills_bar.gd" id="1_rari1"]
 [ext_resource type="Texture2D" uid="uid://bnoje7i2okjtp" path="res://assets/UI_Visuals/Skills_Icons/guard.png" id="2_rari1"]
 [ext_resource type="Texture2D" uid="uid://ccapfxxjtvyfw" path="res://assets/UI_Visuals/Skills_Icons/melee_buff.png" id="3_blrqp"]
 [ext_resource type="Texture2D" uid="uid://dsnlxit2ht1x7" path="res://assets/UI_Visuals/Skills_Icons/light_attack.png" id="4_ppqja"]
@@ -13,7 +13,7 @@ scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("1_e3da1")
+script = ExtResource("1_rari1")
 metadata/_edit_horizontal_guides_ = [1078.0, 0.0]
 metadata/_edit_vertical_guides_ = [1920.0, 1.0]
 

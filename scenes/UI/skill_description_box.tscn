@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxo7gl2mf7ho4"]
+
+[ext_resource type="Script" uid="uid://dcfai3hgd66te" path="res://scripts/UI/skill_description_box.gd" id="1_xcspw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcspw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hy61c"]
+
+[node name="SkillDescriptionBox" type="Control"]
+layout_mode = 3
+anchor_right = 0.148
+anchor_bottom = 0.17500001
+offset_right = -284.16
+offset_bottom = -189.00002
+script = ExtResource("1_xcspw")
+metadata/_edit_vertical_guides_ = [8.0, 118.0]
+metadata/_edit_horizontal_guides_ = [74.0]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 281.0
+offset_bottom = 189.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xcspw")
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 58.0
+offset_bottom = 58.0
+texture = SubResource("CanvasTexture_hy61c")
+
+[node name="Name" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 9.0
+offset_right = 255.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 30
+text = "SKILL NAME"
+vertical_alignment = 2
+
+[node name="SkillDescription" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 74.0
+offset_right = 275.0
+offset_bottom = 182.0
+text = "Description: This 
+ability does absol-
+utely nothing and 
+you lose the game. "
+
+[node name="Stats" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 74.0
+offset_right = 117.0
+offset_bottom = 178.0
+alignment = 2
+
+[node name="BaseRoll" type="Label" parent="Panel/Stats"]
+layout_mode = 2
+text = "Base Roll: x"
+
+[node name="BonusRoll" type="Label" parent="Panel/Stats"]
+layout_mode = 2
+text = "Bonus Roll: y"
+
+[node name="Coins" type="Label" parent="Panel/Stats"]
+layout_mode = 2
+text = "Coins: z"
+
+[node name="Odds" type="Label" parent="Panel/Stats"]
+layout_mode = 2
+text = "Odds: 67%"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -1,3 +1,5 @@
+#NOTE: No longer being used -Adriano
+
 extends Node2D
 # optional: class_name CircleHead
 

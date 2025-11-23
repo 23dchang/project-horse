@@ -21,7 +21,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Speed_Display" type="ColorRect" parent="TripleSkills"]
+[node name="SpeedDisplay" type="ColorRect" parent="TripleSkills"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_right = 182.66667
@@ -32,14 +32,14 @@ color = Color(0.84705883, 0.84705883, 0.84705883, 1)
 layout_mode = 1
 offset_left = 7.333336
 offset_top = 4.6666675
-offset_right = 257.33334
+offset_right = 217.33334
 offset_bottom = 54.666668
 scale = Vector2(0.8, 0.8)
 theme_override_constants/h_separation = 30
 theme_override_constants/v_separation = 10
 columns = 5
 
-[node name="Skill1" type="ColorRect" parent="TripleSkills/EmptySkillsContainer"]
+[node name="Skill3" type="ColorRect" parent="TripleSkills/EmptySkillsContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0.033853278, 0.033853278, 0.033853274, 1)
@@ -49,10 +49,37 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0.033853278, 0.033853278, 0.033853274, 1)
 
-[node name="Skill3" type="ColorRect" parent="TripleSkills/EmptySkillsContainer"]
+[node name="Skill1" type="ColorRect" parent="TripleSkills/EmptySkillsContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+
+[node name="SkillsContainer" type="GridContainer" parent="TripleSkills"]
+visible = false
+layout_mode = 0
+offset_left = 6.6666718
+offset_top = 5.333334
+offset_right = 218.33333
+offset_bottom = 55.333336
+scale = Vector2(0.8, 0.8)
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="Skill1" type="TextureRect" parent="TripleSkills/SkillsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_x627l")
+
+[node name="Skill2" type="TextureRect" parent="TripleSkills/SkillsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_vjawd")
+
+[node name="Skill3" type="TextureRect" parent="TripleSkills/SkillsContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_fl35a")
 
 [node name="Skill1Speed" type="Label" parent="TripleSkills"]
 layout_mode = 0
@@ -80,33 +107,6 @@ offset_right = 198.66667
 offset_bottom = 51.333332
 theme_override_font_sizes/font_size = 24
 text = "7"
-
-[node name="SkillsContainer" type="GridContainer" parent="TripleSkills"]
-visible = false
-layout_mode = 0
-offset_left = 79.333336
-offset_top = 5.3333397
-offset_right = 329.33334
-offset_bottom = 55.33334
-scale = Vector2(0.8, 0.8)
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
-columns = 5
-
-[node name="Skill1" type="TextureRect" parent="TripleSkills/SkillsContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = ExtResource("2_x627l")
-
-[node name="Skill2" type="TextureRect" parent="TripleSkills/SkillsContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = ExtResource("3_vjawd")
-
-[node name="Skill3" type="TextureRect" parent="TripleSkills/SkillsContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = ExtResource("4_fl35a")
 
 [node name="DoubleSkills" type="Control" parent="."]
 visible = false

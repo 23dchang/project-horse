@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var outline : Line2D = $OutlineLine
 @onready var main    : Line2D = $MainLine
-@onready var circle  : Node2D = $CircleHead
+#@onready var circle  : Node2D = $CircleHead
 
 var node_start : Node
 var node_end   : Node
@@ -53,9 +53,9 @@ func _process(_delta):
 		main.add_point(pt)
 
 	# circle tip
-	if main.get_point_count() >= 2:
-		var p_last = main.get_point_position(main.get_point_count() - 1)
-		var p_prev = main.get_point_position(main.get_point_count() - 2)
-		var d = (p_last - p_prev).normalized()
-
-		circle.position = p_last + d * 12
+	#if main.get_point_count() >= 2:
+		#var p_last = main.get_point_position(main.get_point_count() - 1)
+		#var p_prev = main.get_point_position(main.get_point_count() - 2)
+		#var d = (p_last - p_prev).normalized()
+#
+		#circle.position = p_last + d * 12
