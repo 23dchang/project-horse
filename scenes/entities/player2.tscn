@@ -37,10 +37,10 @@ offset_bottom = 62.0
 scale = Vector2(0.6, 0.6)
 
 [node name="SkillsColumn" parent="." instance=ExtResource("5_0kreu")]
-offset_left = -142.0
-offset_top = 192.0
-offset_right = -142.0
-offset_bottom = 192.0
+offset_left = -480.0
+offset_top = 150.0
+offset_right = -480.0
+offset_bottom = 150.0
 
 [node name="Name" type="Label" parent="."]
 offset_left = -44.0

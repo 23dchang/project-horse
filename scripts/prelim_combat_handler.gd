@@ -19,7 +19,7 @@ func setup_fight() -> void:
 
 func spawn_players() -> void:
 	#var player_positions = [Vector2(-450, -200), Vector2(-400, 150)]
-	var player_positions = [Vector2(-600, -150), Vector2(-200, -150)]
+	var player_positions = [Vector2(-600, -150), Vector2(-150, -150)]
 	
 	for i in range(MAX_PLAYERS):
 		var player_instance: Entity

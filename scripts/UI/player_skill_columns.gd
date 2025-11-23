@@ -20,6 +20,9 @@ const SKILL_ICONS : Array[Texture2D] = [
 # sibling under the same Player node
 @onready var player_bar: SkillsBar = (get_parent().get_node_or_null("SkillsBar")) as SkillsBar
 
+@export var offset_position: Vector2 = Vector2(400, 0)
+var _original_position: Vector2
+
 var columns: Array
 const ROWS_PER_COLUMN := 3
 
@@ -28,6 +31,9 @@ func _ready():
 	columns = [col1, col2, col3]
 	desc_box.visible = false
 	#print("[SkillsColumn] Ready.")
+	# TODO: UI centering bug. Description boxes hovering when shifted
+	#_original_position = position   
+	#position = _original_position + offset_position
 
 func generate_placeholder_skill_icons():
 	print("[SkillsColumn] generate_placeholder_skill_icons()")
