@@ -11,10 +11,10 @@ var players: Array[Entity] = []
 var enemy: Entity
 
 func setup_fight() -> void:
-	spawn_players()
-	spawn_enemy()
-	init_skills()  # Setup skills for all entities
-	apply_skills_to_UI()
+	spawn_players() # generates players instances with all UI child scenes
+	spawn_enemy() # generates enemy instance with all UI child scenes
+	init_skills() # Setup skills for all entities
+	apply_skills_to_UI() # inserts placeholder skill icons in UI
 
 
 func spawn_players() -> void:
@@ -34,17 +34,17 @@ func spawn_players() -> void:
 		add_child(player_instance)
 		players.append(player_instance)
 		
-		#generate skills bar for this player
+		#generate skills bar for player instance
 		var bar = player_instance.get_node_or_null("SkillsBar")
 		if bar:
 			bar.generate_placeholder_skill_icons()
 			
-		#generate skills column for this player
+		#generate skills column for player instance
 		var col = player_instance.get_node_or_null("SkillsColumn")
 		if col:
 			col.generate_placeholder_skill_icons()
 			
-		print((i + 1))
+		print("Player %d Generated!\n" % (i + 1))
 
 func spawn_enemy() -> void:
 	var enemy_position = Vector2(200, 0)
@@ -91,6 +91,7 @@ func init_skills() -> void:
 		enemy.skills.append(skill_instance)
 		
 func apply_skills_to_UI():
+	print("Inteserting placeholder skills for all players...")
 	for player in players:
 		var col := player.get_node_or_null("SkillsColumn")
 		if col:

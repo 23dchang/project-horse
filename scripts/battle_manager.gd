@@ -69,7 +69,7 @@ func start_battle():
 	for player in players:
 		action_handler.store_original_pool(player)
 		
-	# Sets action_handlers boss ref to this one 
+	# Sets action_handlers boss ref to this one
 	action_handler.set_boss_reference(enemy)
 	
 	_start_skill_selection()
@@ -77,7 +77,7 @@ func start_battle():
 # Skill selection phase
 func _start_skill_selection():
 	state = State.SKILL_SELECTION
-	print("\n Phase: Skill Selection")
+	print("\nPhase: Skill Selection\n")
 	
 	# Boss selects its skills FIRST
 	var boss_skills = await _get_boss_skills()
@@ -86,31 +86,26 @@ func _start_skill_selection():
 	action_handler.set_boss_skills(boss_skills)
 	
 	# populates empty boss skill slots with P; NP if unsuccessful
-	action_handler.populate_entity_skill_bar() 
+	action_handler.populate_entity_skill_bar()
 	
 	# Setup skill selection for all characters
 	action_handler.setup_selection(players)
 	
-	# Generate red preview arrows. Only visible when hovering over boss/enemy entity 
+	# Generate red preview arrows. Only visible when hovering over boss/enemy entity
 	action_handler.prepare_preview_arrows()
 	
-	"""
-	TODO: Load the player skills into the skills_columns. For each players, load up to 9 skills
-	(for 3 columns with 3 skills each). Loading also includes updating the description box 
-	labels with 
-	
-	Right now skills dont have much info
-	
-
-	TODO: The player can click on 
-	"""
-	
-	# populates the 
+	# populates the empty black boxes with P_skillID from skill pool
 	action_handler.populate_player_skill_selection()
+	
+	# user interacts with UI to select their skill per player
+	action_handler.select_player_skills()
 	
 	# Wait for all character selections to complete
 	# UI should call action_handler.set_skill_for_slot() multiple times
 	await action_handler.all_selections_complete
+	
+	# display all player selections
+	action_handler.display_player_selections()
 	
 	# Get all player skills
 	var all_skills = action_handler.get_all_selected_skills()
@@ -127,6 +122,7 @@ func _start_skill_selection():
 
 # Boss AI skill selection (placeholder)
 func _get_boss_skills() -> Array:
+	print("Boss selecting skills and targetting players...")
 	var skills: Array = []
 	
 	# TODO: Replace with actual boss AI logic
@@ -152,8 +148,8 @@ func _get_boss_skills() -> Array:
 		skills.append(skill_slot)
 		
 		# Print the boss' skill selection
-		print("  [_get_boss_skills()] Boss Slot %d -> Player %d Slot %d (Skill %d)" % 
-			[boss_slot_index, target_player_index, target_slot_index, random_skill.skill_id])
+		print(" [_get_boss_skills()] Boss Slot %d -> Player %d Slot %d (Skill %d)" %
+			[boss_slot_index + 1, target_player_index + 1, target_slot_index+1, random_skill.skill_id])
 	
 	return skills
 

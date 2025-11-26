@@ -133,7 +133,7 @@ func show_skills(player: Entity) -> void:
 
 		for row_i in range(container.get_child_count()):
 			var icon = container.get_child(row_i)
-			print("[DEBUG show_skills BEFORE] Column", col_i+1, "Row", row_i+1, "is:", icon.get_class())
+			#print("[DEBUG show_skills BEFORE] Column", col_i+1, "Row", row_i+1, "is:", icon.get_class())
 
 			# Reset metadata + signals
 			icon.set_meta("skill", null)
