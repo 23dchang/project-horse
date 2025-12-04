@@ -60,13 +60,13 @@ offset_right = 117.0
 offset_bottom = 178.0
 alignment = 2
 
-[node name="BaseRoll" type="Label" parent="Panel/Stats"]
+[node name="BasePower" type="Label" parent="Panel/Stats"]
 layout_mode = 2
-text = "Base Roll: x"
+text = "Base Power: x"
 
-[node name="BonusRoll" type="Label" parent="Panel/Stats"]
+[node name="CoinPower" type="Label" parent="Panel/Stats"]
 layout_mode = 2
-text = "Bonus Roll: y"
+text = "Coin Power: y"
 
 [node name="Coins" type="Label" parent="Panel/Stats"]
 layout_mode = 2

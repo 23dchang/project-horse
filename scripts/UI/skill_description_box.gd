@@ -4,8 +4,8 @@ extends Control
 @onready var icon_tex   : TextureRect = $Panel/Icon
 @onready var name_label : Label       = $Panel/Name
 @onready var description_label : Label= $Panel/SkillDescription
-@onready var base_label : Label       = $Panel/Stats/BaseRoll
-@onready var bonus_label: Label       = $Panel/Stats/BonusRoll
+@onready var base_label : Label       = $Panel/Stats/BasePower
+@onready var bonus_label: Label       = $Panel/Stats/CoinPower
 @onready var coins_label: Label       = $Panel/Stats/Coins
 @onready var odds_label : Label       = $Panel/Stats/Odds
 
