@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgcg4g8gfwnt5"]
+
+[ext_resource type="Texture2D" uid="uid://h57ept03cgif" path="res://assets/UI_Visuals/sprites/bear_idle.png" id="1_jncid"]
+[ext_resource type="Texture2D" uid="uid://c5ikgy6egdq2e" path="res://assets/UI_Visuals/sprites/Boss1_roar.png" id="2_qnbj4"]
+[ext_resource type="Texture2D" uid="uid://de7dww5xioohc" path="res://assets/UI_Visuals/sprites/boss_hurt.png" id="3_r3bxh"]
+
+[sub_resource type="Animation" id="Animation_wqpjq"]
+resource_name = "idle"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BearIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_2cdgk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BearIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boss1Roar:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossHurt:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qsl3t"]
+resource_name = "roar"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boss1Roar:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 8]
+}
+
+[sub_resource type="Animation" id="Animation_2avx2"]
+resource_name = "hurt"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossHurt:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5f346"]
+_data = {
+&"RESET": SubResource("Animation_2cdgk"),
+&"hurt": SubResource("Animation_2avx2"),
+&"idle": SubResource("Animation_wqpjq"),
+&"roar": SubResource("Animation_qsl3t")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5f346")
+}
+
+[node name="BearIdle" type="Sprite2D" parent="."]
+position = Vector2(351, 252)
+texture = ExtResource("1_jncid")
+hframes = 3
+vframes = 3
+
+[node name="Boss1Roar" type="Sprite2D" parent="."]
+position = Vector2(353, 249)
+texture = ExtResource("2_qnbj4")
+hframes = 3
+vframes = 3
+
+[node name="BossHurt" type="Sprite2D" parent="."]
+position = Vector2(353, 251)
+texture = ExtResource("3_r3bxh")
+hframes = 3
+vframes = 3

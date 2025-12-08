@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bux1266rx2p6v"]
+[gd_scene load_steps=7 format=3 uid="uid://bux1266rx2p6v"]
 
 [ext_resource type="Script" uid="uid://um5jv34twlee" path="res://scripts/main.gd" id="1_0wfyh"]
-[ext_resource type="Texture2D" uid="uid://dlapkrmahkgcn" path="res://assets/UI_Visuals/sprites/BG_img.png" id="2_0wfyh"]
+[ext_resource type="Texture2D" uid="uid://bivy5gkn4dj0e" path="res://assets/UI_Visuals/sprites/bg_img_v2.jpg" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://dne3otw1aqv7y" path="res://scenes/character_body_2d.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c01s1f5nbu47t" path="res://scenes/character_body_2d_2.tscn" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cgcg4g8gfwnt5" path="res://scenes/boss.tscn" id="5_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cmbxomksxddp" path="res://scenes/boss_2.tscn" id="6_tipki"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_0wfyh")
@@ -11,8 +13,14 @@ script = ExtResource("1_0wfyh")
 [node name="BgImg" type="Sprite2D" parent="."]
 position = Vector2(2.499939, -2.5000916)
 scale = Vector2(3.1808333, 3.2340744)
-texture = ExtResource("2_0wfyh")
+texture = ExtResource("2_tefeu")
 
 [node name="Yellow" parent="." instance=ExtResource("3_jyhfs")]
+position = Vector2(-1024, 69)
 
 [node name="Red" parent="." instance=ExtResource("4_tbgi4")]
+position = Vector2(-1330, 321)
+
+[node name="Boss1" parent="." instance=ExtResource("5_o6xl0")]
+
+[node name="Boss2" parent="." instance=ExtResource("6_tipki")]

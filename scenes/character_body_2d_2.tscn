@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c01s1f5nbu47t"]
+[gd_scene load_steps=15 format=3 uid="uid://c01s1f5nbu47t"]
 
 [ext_resource type="Texture2D" uid="uid://bixw5jm5lgt3b" path="res://assets/UI_Visuals/sprites/red_idle.png" id="1_xhyef"]
 [ext_resource type="Texture2D" uid="uid://c1mmt6rew2dj6" path="res://assets/UI_Visuals/sprites/red_guard.png" id="2_gr2ii"]
@@ -21,9 +21,66 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_5o1my"]
-resource_name = "RedHurt"
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RedGuard:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RedHurt:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RedMove:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RedAttack1:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RedAttack2:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_hatri"]
 resource_name = "idle"
@@ -41,11 +98,96 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_gr2ii"]
+resource_name = "guard"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedGuard:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_5o1my"]
+resource_name = "hurt"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedHurt:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_qeo7v"]
+resource_name = "move"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedMove:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_e2jhp"]
+resource_name = "attack1"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedAttack1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_llaa4"]
+resource_name = "attack2"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedAttack2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bhr3b"]
 _data = {
 &"RESET": SubResource("Animation_fey4y"),
-&"RedHurt": SubResource("Animation_5o1my"),
-&"idle": SubResource("Animation_hatri")
+&"attack1": SubResource("Animation_e2jhp"),
+&"attack2": SubResource("Animation_llaa4"),
+&"guard": SubResource("Animation_gr2ii"),
+&"hurt": SubResource("Animation_5o1my"),
+&"idle": SubResource("Animation_hatri"),
+&"move": SubResource("Animation_qeo7v")
 }
 
 [node name="Red" type="CharacterBody2D"]
@@ -57,24 +199,28 @@ libraries = {
 autoplay = "idle"
 
 [node name="RedIdle" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(125, 166)
 texture = ExtResource("1_xhyef")
 hframes = 4
 vframes = 3
 
 [node name="RedGuard" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(124, 165)
 texture = ExtResource("2_gr2ii")
 hframes = 3
 vframes = 3
 
 [node name="RedHurt" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(124, 167)
 texture = ExtResource("4_e2jhp")
 hframes = 3
 vframes = 3
 
 [node name="RedMove" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-116, 142.5)
 scale = Vector2(1.6511111, 1.6816666)
 texture = ExtResource("5_llaa4")
@@ -82,6 +228,7 @@ hframes = 3
 vframes = 3
 
 [node name="RedAttack1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(485, 132)
 scale = Vector2(1.702118, 1.6564583)
 texture = ExtResource("3_qeo7v")
