@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5ikgy6egdq2e"
-path="res://.godot/imported/boss1_roar.png-6b085d04d2c935a88c2287299a3c3bef.ctex"
+uid="uid://cjbc45hssvbrf"
+path="res://.godot/imported/red_move.png-410a62c0b299eac8f13f891fe1cfeb73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI_Visuals/sprites/boss1_roar.png"
-dest_files=["res://.godot/imported/boss1_roar.png-6b085d04d2c935a88c2287299a3c3bef.ctex"]
+source_file="res://assets/UI_Visuals/sprites/red_move.png"
+dest_files=["res://.godot/imported/red_move.png-410a62c0b299eac8f13f891fe1cfeb73.ctex"]
 
 [params]
 
