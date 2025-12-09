@@ -1,11 +1,11 @@
 # Danielle Chang
   ### Animation/Visuals
-    #### Moodboards
-    Came up with moodboards on potential themes 
-    (https://github.com/user-attachments/assets/d8a4a537-ede5-42b4-9c4d-20cdace67dd3)
-    (https://github.com/user-attachments/assets/3a5a8113-9fbd-486f-8352-c0a7bcc835c7)
-    (https://github.com/user-attachments/assets/910e07cd-4ea0-43aa-8445-0b6e2e2aa866)
-    (https://github.com/user-attachments/assets/d6de4dda-d39f-44b8-a24e-c0c9bade8eee)
+moodboards
+Came up with moodboards on potential themes 
+(https://github.com/user-attachments/assets/d8a4a537-ede5-42b4-9c4d-20cdace67dd3)
+(https://github.com/user-attachments/assets/3a5a8113-9fbd-486f-8352-c0a7bcc835c7)
+(https://github.com/user-attachments/assets/910e07cd-4ea0-43aa-8445-0b6e2e2aa866)
+(https://github.com/user-attachments/assets/d6de4dda-d39f-44b8-a24e-c0c9bade8eee)
     
     #### Asset Creation
     After coming up, 
