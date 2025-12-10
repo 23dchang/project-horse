@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://65qqv4o62u7m"
-path="res://.godot/imported/red_move.png-410a62c0b299eac8f13f891fe1cfeb73.ctex"
+uid="uid://bqbthujpxltkx"
+path="res://.godot/imported/red_combo2.png-ecd916de161fec987874f44e9c080669.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI_Visuals/sprites/red_move.png"
-dest_files=["res://.godot/imported/red_move.png-410a62c0b299eac8f13f891fe1cfeb73.ctex"]
+source_file="res://assets/UI_Visuals/sprites/red_combo2.png"
+dest_files=["res://.godot/imported/red_combo2.png-ecd916de161fec987874f44e9c080669.ctex"]
 
 [params]
 
